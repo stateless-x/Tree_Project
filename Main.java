@@ -2,8 +2,6 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-
-
 class Monkey {
     private int towerNum;
     private ArrayDeque<Integer> height /*= new ArrayDeque<>()*/;
@@ -13,7 +11,6 @@ class Monkey {
 
     public Monkey() {
         while(Run) {
-            System.out.flush();
             height = new ArrayDeque<>();
             jumper = new Stack<Integer>();
             int n, tempnum;
@@ -73,7 +70,7 @@ class Monkey {
             }
 
             System.out.print("\n");
-            move();
+            findPath();
             System.out.println("\nDo you want to run again? Enter yes to run again or anything else to end the program.");
             System.out.print("==> ");
             Scanner Conti = new Scanner(System.in);
@@ -94,27 +91,26 @@ class Monkey {
                     break;
             }
         }
-
         System.out.println("The program is done. Thanks for playing!");
     }
 
-    public void move(){
-        int n = height.peekLast(),count = 1,first,jump;
+    public void findPath(){
+        int n = height.peekLast(),count = 1,cur,jump;
         while(!height.isEmpty()){  /// while array height is available
-            first = height.peekFirst();
-            if(!jumper.isEmpty() && jumper.peek() <= first)
+            cur = height.peekFirst();
+            if(!jumper.isEmpty() && jumper.peek() <= cur)
             {  jump = jumper.pop();
-                System.out.print("  " + count + "   From " + jump+ "-ft tree to " + first + "-ft tree\n");
+                System.out.print("  " + count + "   From " + jump+ "-ft tree to " + cur + "-ft tree\n");
                 count++;
                 continue; }
                 //System.out.println("heigh that will pop" + height.peekFirst());
-            first = height.pop();
+            cur = height.pop();
             if(!height.isEmpty())   // is the value inside height array isn't null print the move step
-            {   if (first > height.peekFirst())jumper.add(first);
-                System.out.print("  " + count + "   From " + first + "-ft tree to " + height.peekFirst() + "-ft tree\n");
+            {   if (cur > height.peekFirst())jumper.add(cur);
+                System.out.print("  " + count + "   From " + cur + "-ft tree to " + height.peekFirst() + "-ft tree\n");
                 count++; }
             else {
-                break;
+                break; // no more tree to swing
                 }; // break the loop
         }
         System.out.printf("\nTotal swinging paths = " + (count-1));
@@ -129,7 +125,6 @@ class Monkey {
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         new Monkey();
     }
 }
