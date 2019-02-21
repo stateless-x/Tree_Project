@@ -1,6 +1,0 @@
--> do while loop condition 
-
-https://stackoverflow.com/questions/42007352/testing-if-an-input-is-integer-and-larger-than-two-conditions-with-do-while-lo
-
--> Math.random
-https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
